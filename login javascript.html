@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    /* CSS styles for the login form */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="submit"] {
+      margin-top: 10px;
+    }
+    
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+  <script>
+    // JavaScript code for form validation
+    function validateForm() {
+      // Retrieve form input values
+      var name = document.getElementById("name").value;
+      var password = document.getElementById("password").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      
+      // Validation rules
+      var nameMinLength = 6;
+      var passwordMinLength = 6;
+      var phoneLength = 10;
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      // Initialize error messages
+      var errorMessage = "";
+      
+      // Validate name field
+      if (name.length < nameMinLength) {
+        errorMessage += "Name should be at least " + nameMinLength + " characters long.<br>";
+      }
+      
+      // Validate password field
+      if (password.length < passwordMinLength) {
+        errorMessage += "Password should be at least " + passwordMinLength + " characters long.<br>";
+      }
+      
+      // Validate email field
+      if (!email.match(emailPattern)) {
+        errorMessage += "Invalid email address.<br>";
+      }
+      
+      // Validate phone field
+      if (phone.length !== phoneLength || isNaN(phone)) {
+        errorMessage += "Phone number should contain exactly " + phoneLength + " digits only.<br>";
+      }
+      
+      // Display error message or submit the form
+      if (errorMessage !== "") {
+        document.getElementById("error-message").innerHTML = errorMessage;
+        return false; // Prevent form submission
+      } else {
+        return true; // Submit the form
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Login Form</h1>
+  <form onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+    
+    <label for="email">E-mail ID:</label>
+    <input type="email" id="email" required>
+    
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" required>
+    
+    <input type="submit" value="Login">
+    
+    <div id="error-message" class="error"></div>
+  </form>
+</body>
+</html>
